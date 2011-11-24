@@ -1,6 +1,6 @@
 (function(){
 
-var JSVMS = function(attributes){
+var juice = function(attributes){
         attributes || (attributes = {});
         //internal attributes
         var _attrs = {};
@@ -20,7 +20,7 @@ var JSVMS = function(attributes){
         return function(){ return id++; };
     })();
 
-JSVMS.prototype = {
+juice.prototype = {
     init: function(attrs) {
         this.__id = _uniqId();
         /*
@@ -97,6 +97,6 @@ JSVMS.prototype = {
     }
 };
 
-    //export JSVMS to global
-    this.JSVMS = JSVMS;
+    //export juic to global
+    this.juice = juice;
 })(this);

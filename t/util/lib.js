@@ -11,4 +11,4 @@ load('./t/util/envjs/env.rhino.1.2.js');
 load('./t/util/envjs/env.spidermonkey.js');
 window.location = 'index.html';
 
-load('./src/jsvms.js');
+load('./src/juice.js');

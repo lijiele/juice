@@ -1,9 +1,9 @@
 load('./t/util/lib.js');
 //plan({noPlan:true});
 plan({tests:12});
-is(new juice() instanceof Object, true, 'contructor: empty');
-is(new juice({}) instanceof Object, true, 'contructor: empty object');
-var juice = new juice({key:'123'});
+is(new Juice() instanceof Object, true, 'contructor: empty');
+is(new Juice({}) instanceof Object, true, 'contructor: empty object');
+var juice = new Juice({key:'123'});
 is(juice.__id, '3', 'id');
 isDeeply(juice.get(['key']), {key:'123'}, 'get key');
 juice.set({'key':345});

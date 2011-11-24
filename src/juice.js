@@ -1,6 +1,6 @@
 (function(){
 
-var juice = function(attributes){
+var Juice = function(attributes){
         attributes || (attributes = {});
         //internal attributes
         var _attrs = {};
@@ -20,7 +20,7 @@ var juice = function(attributes){
         return function(){ return id++; };
     })();
 
-juice.prototype = {
+Juice.prototype = {
     init: function(attrs) {
         this.__id = _uniqId();
         /*
@@ -97,6 +97,6 @@ juice.prototype = {
     }
 };
 
-    //export juic to global
-    this.juice = juice;
+    //export Juic to global
+    this.Juice = Juice;
 })(this);

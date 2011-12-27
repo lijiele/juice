@@ -52,7 +52,13 @@ Juice.prototype = {
         if(__cbk.length > 0) {
             __cbk = this._uniqArray(__cbk);
             for(var i in __cbk) {
-                this._callback[__cbk[i]].call();
+                //this._callback[__cbk[i]].call();
+                setTimeout((function(cb){
+                    return function() {
+                        //console.log('cbkk: ', i, __cbk[i], me._callback[__cbk[i]] + '');
+                        cb();
+                    }
+                })(this._callback[__cbk[i]]), 0);
             }
         }
     },

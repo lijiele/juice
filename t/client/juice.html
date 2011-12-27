@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=7" />
+    <link href="../qunit/qunit.css" rel="stylesheet" type="text/css" />
+    <title>juice test scaffold</title>
+    <script type="text/javascript" src="../qunit/qunit.js"></script>
+    <script type="text/javascript" src="../../src/juice.js"></script>
+</head>
+<body>
+<div style="height:40px;width:765px;" id="lz-boiler-plate" class="content"><div id="dpicker"></div><span id="score"></span></div>
+
+<div>
+    <h1 id="qunit-header">Date Test Suite</h1>
+      <h2 id="qunit-banner"></h2>
+
+        <div id="qunit-testrunner-toolbar"></div>
+          <h2 id="qunit-userAgent"></h2>
+            <ol id="qunit-tests"></ol>
+            </div>
+            <script>
+var j = new Juice();
+
+test("init juice instance", function() {
+      ok(typeof j == 'object', 'instance is object');
+      equal(j.__id, 1, '__id == 1');
+});
+
+  var oj = new Juice();
+  test("another instance", function() {
+      equal(oj.__id, 2, '__id == 2');
+  });
+
+     test("test get", function() {
+         equal(j.get("key"), undefined, 'get empty for: undefined');
+         deepEqual(j.get(["key"]), {key: undefined}, 'get empty for array: undefined');
+         j.set({key: 'value'});
+         equal(j.get("key"), 'value', 'get key , and equal "value"');
+         deepEqual(j.get(["key"]), {key: 'value'}, 'get key for array: value');
+     });
+
+test("test del", function() {
+    j.del('key');
+    equal(j.get("key"), undefined, 'undefined after del');
+});
+    var total = 0;
+test("test bind", function() {
+
+    j.set({'key': 1});
+    j.bind(['key'], function() {
+        total++;
+    });
+    j.set({'key': 1});
+    strictEqual(total, 0, 'set no change value');
+    j.set({'key': 2});
+    equal(total, 1, 'set value and triggle the binded func');
+    j.set({'key': 1});
+    equal(total, 2, 'set value and triggle the binded func again');
+    for(var i = 0;i< 100;i++) {
+        j.set({'key': i});
+    };
+    equal(total, 102, 'set value 100 times, cb 100 times');
+});
+var total2 = 0;
+test("test another bind", function() {
+    j.bind(['key'], function() {
+        total2++;
+    });
+    j.set({'key': 1});
+    equal(total, 103, 'set key to 1, triggle two binded func 1');
+    equal(total2, 1, 'set key to 1, triggle two binded func 2');
+    for(var i = 0;i< 100;i++) {
+        j.set({'key': i});
+    }
+    equal(total, 203, 'set value 100 times, cb 100 times, triggle two binded func 1');
+    equal(total2, 101, 'set value 100 times, cb 100 times, triggle two binded func 2');
+});
+            </script>
+</body>
+</html>

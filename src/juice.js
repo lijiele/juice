@@ -11,7 +11,10 @@ var Juice = function(attributes){
         //internal get function
         this._get = function(){
             return _attrs;
-        }
+        };
+        this._del = function(key) {
+            delete _attrs[key];
+        };
         this.init(attributes);
         return this;
     },
@@ -52,15 +55,24 @@ Juice.prototype = {
         if(__cbk.length > 0) {
             __cbk = this._uniqArray(__cbk);
             for(var i in __cbk) {
-                //this._callback[__cbk[i]].call();
+                this._callback[__cbk[i]].call();
+                /*
                 setTimeout((function(cb){
                     return function() {
                         //console.log('cbkk: ', i, __cbk[i], me._callback[__cbk[i]] + '');
                         cb();
                     }
                 })(this._callback[__cbk[i]]), 0);
+                */
             }
         }
+    },
+    del: function(key) {
+        var _value = this.get(key);
+        if(_value != undefined) {
+            this._del(key);
+        }
+        //TODO: delete bind function
     },
     get: function(list) {
         var _attrs = this._get();

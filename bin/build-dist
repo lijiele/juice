@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "module('juice', function(mod){"
+cat src/juice.js
+echo "});"
